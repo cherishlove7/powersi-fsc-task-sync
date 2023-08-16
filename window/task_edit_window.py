@@ -162,8 +162,7 @@ class TaskEditWindow(QMainWindow, Ui_TaskEditWindow):
         table_header.resizeSection(6, 150)
         table_header.resizeSection(7, 200)
         table_header.resizeSection(11, 160)
-        # table_header.resizeSection(9, 350)
-        # table_header.resizeSection(12, 300)
+        table_header.resizeSection(14, 600)
 
         # 隐藏表格指定列
         self.tableWidget.setColumnHidden(15, True)
