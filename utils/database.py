@@ -31,7 +31,7 @@ class TaskTable(Base):
     sql_content = Column(TEXT)  # sql语句
     task_exec_status = Column(String(200), default='未执行')  # 执行状态:未执行,正在执行,执行失败,执行成功
     result_data = Column(TEXT)  # 执行结果
-    row_count = Column(Integer, default=9999999999)  # 结果条数
+    row_count = Column(Integer, default=99999999)  # 结果条数
     reason = Column(TEXT)  # 异常数据原因
     task_month = Column(String(200))  # NULL, -- 月份
     expect_finish_date = Column(String(200))  # 期望完成时间
