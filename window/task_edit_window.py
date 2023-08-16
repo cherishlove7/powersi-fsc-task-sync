@@ -356,5 +356,9 @@ class TaskEditWindow(QMainWindow, Ui_TaskEditWindow):
             self.systemTitleEdit.setText(current_data['system_title'])
             self.rowCountEdit.setText(current_data['row_count'])
             self.systemProcessStatusComboBox.setCurrentText(current_data['system_process_status'])
-            self.sqlContentEdit.setText(current_data['sql_content'] + 3 * '\r\n' + current_data['result_data'])
+            self.sqlContentEdit.setText(
+                    current_data['sql_content'] + 3 * '\r\n' +
+                    current_data['result_data'] + 3 * '\r\n' +
+                    current_data['memo']
+            )
             self.reasonTextEdit.setText(current_data['reason'])
