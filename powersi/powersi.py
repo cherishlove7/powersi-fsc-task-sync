@@ -31,8 +31,7 @@ class PowersiService:
             if self.username:
                 break
         # 每隔login_timer_minutes分钟登录一次
-        threading.Timer(login_timer_minutes*60, self.__init__).start()
-
+        threading.Timer(login_timer_minutes * 60, self.__init__).start()
 
     def auto_login(self):
         try:
@@ -240,6 +239,8 @@ class PowersiService:
         :desc 备注
         :return:
         """
+        system_process_status_dict = {'正常': '01', '异常': '02', '可疑': '03', '无法执行': '04', '优化脚本': '05'}
+
         desc = None
         if len(result_desc) >= 450:
             desc = result_desc
@@ -249,7 +250,7 @@ class PowersiService:
                 'taskId': system_task_id,
                 'state': '02',
                 'sp_staff_id': "",
-                'check_result': system_process_status,
+                'check_result': system_process_status_dict[system_process_status],
                 'results': row_count,
                 'result_desc': result_desc,
                 'file_str': file_id,
@@ -275,9 +276,10 @@ class PowersiService:
                 },
                 params=urlencode(data, encoding='gbk')
             )
-            # print("任务提交响应代码", r.status_code)  # 200
-            print("任务提交响应结果:", r.content)  #  b'{"errortype":"0","data":"\xb2\xd9\xd7\xf7\xb3\xc9\xb9\xa6...","message":""}'
+            r.encoding = 'gbk'
+            print("任务提交响应结果:", r.content)
             response_json = r.json()
+            print(response_json)
             if str(response_json['errortype']) == '0':
                 print(f'任务提交成功：{data}')
                 return True

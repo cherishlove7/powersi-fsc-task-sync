@@ -89,16 +89,17 @@ class BatchCommitTasksThread(QThread):
 
 
 def task_export_to_file(task_data):
+    print(task_data)
     export_path = os.path.join(os.getcwd(), 'export')
     os.makedirs(export_path, exist_ok=True)
-    sql_file_content = task_data['sql_file_content']
+    sql_content = task_data['sql_content']
     result_data = task_data['result_data']
     file_name = task_data['subject_code'] + '.sql'
-    file_content = sql_file_content + '\r\n\r\n' + result_data
+    file_content = sql_content + '\r\n\r\n' + result_data
     file_export_path = os.path.join(export_path, file_name)
     try:
         with open(file_export_path, mode='w', encoding='utf-8', newline='') as f:
-            f.write(sql_file_content.strip())
+            f.write(file_content.strip())
             print(f'导出成功：{file_export_path}')
             return file_export_path
     except Exception as e:

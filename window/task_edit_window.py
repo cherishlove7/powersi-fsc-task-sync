@@ -98,7 +98,7 @@ class TaskEditWindow(QMainWindow, Ui_TaskEditWindow):
         :return:
         """
         query_conditions = self.get_current_query_conditions()
-        if query_conditions.system_commit_status != "执行成功":
+        if query_conditions.task_exec_status != "执行成功":
             QMessageBox.warning(self, "信息", '只能选择执行成功的任务进行提交')
             return
         if query_conditions.system_commit_status:
@@ -112,7 +112,7 @@ class TaskEditWindow(QMainWindow, Ui_TaskEditWindow):
 
         msg_box = QMessageBox()
         msg_box.setWindowTitle("提交多个任务")
-        msg_box.setText("此操作只提交执行成功且未处理完成的任务，确定要将选中任务提交至信息管理平台吗？该操作不可撤销!!!")
+        msg_box.setText("此操作只提交执行成功且未处理完成的任务，确定要将选中任务提交至信息管理平台吗？该操作不可撤销!")
         msg_box.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
         msg_box.setDefaultButton(QMessageBox.Cancel)
         result = msg_box.exec_()
@@ -231,6 +231,8 @@ class TaskEditWindow(QMainWindow, Ui_TaskEditWindow):
             status, system_task_ids = self.powersi.query_system_task_ids()
             if status:
                 current_system_task_ids = system_task_ids
+                if not current_system_task_ids:
+                    current_system_task_ids = ['信息管理平台']
             else:
                 QMessageBox.warning(self, "信息", '信息管理平台数据获取失败，请检查网络或重新登录!')
         query_conditions = QueryTaskModel(
