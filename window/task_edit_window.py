@@ -358,4 +358,3 @@ class TaskEditWindow(QMainWindow, Ui_TaskEditWindow):
             self.systemProcessStatusComboBox.setCurrentText(current_data['system_process_status'])
             self.sqlContentEdit.setText(current_data['sql_content'] + 3 * '\r\n' + current_data['result_data'])
             self.reasonTextEdit.setText(current_data['reason'])
-            # print(f'当前索引：{self.systemProcessStatusComboBox.currentIndex()}')
