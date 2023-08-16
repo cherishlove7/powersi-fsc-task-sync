@@ -127,14 +127,14 @@ class TaskEditWindow(QMainWindow, Ui_TaskEditWindow):
             '主题名称': 'system_title',
             '地市名称': 'city_name',
             '系统处理状态': 'system_process_status',
-            '任务运行状态': 'task_exec_status',
-            '任务运行时长': 'task_exec_time',
-            'SQL语句': 'sql_content',
-            'SQL运行结果': 'result_data',
             '结果条数': 'row_count',
             '检查结果说明': 'reason',
             '月份': 'task_month',
             '期望完成时间': 'expect_finish_date',
+            '任务运行状态': 'task_exec_status',
+            '任务运行时长': 'task_exec_time',
+            'SQL语句': 'sql_content',
+            'SQL运行结果': 'result_data',
             '备注': 'memo',
             'SQL名称': 'sql_file_name',
         }
@@ -154,9 +154,14 @@ class TaskEditWindow(QMainWindow, Ui_TaskEditWindow):
 
         # 设置表格指定列宽
         table_header.resizeSection(0, 10)
-        # table_header.resizeSection(2, 160)
-        # table_header.resizeSection(3, 150)
-        # table_header.resizeSection(4, 300)
+        table_header.resizeSection(1, 120)
+        table_header.resizeSection(2, 150)
+        table_header.resizeSection(3, 300)
+        table_header.resizeSection(4, 150)
+        table_header.resizeSection(5, 150)
+        table_header.resizeSection(6, 150)
+        table_header.resizeSection(7, 200)
+        table_header.resizeSection(11, 160)
         # table_header.resizeSection(9, 350)
         # table_header.resizeSection(12, 300)
 
@@ -251,7 +256,7 @@ class TaskEditWindow(QMainWindow, Ui_TaskEditWindow):
         self.tableWidget.setRowCount(len(task_list))
         for r_idx, row_data in enumerate(task_list):
             for c_idx, column_en_name in enumerate(self.column_en_name_list):
-                item = QTableWidgetItem(str(row_data[column_en_name]) if row_data[column_en_name] else str())
+                item = QTableWidgetItem(str(row_data[column_en_name]) if row_data[column_en_name] is not None else str())
                 self.tableWidget.setItem(r_idx, c_idx + 1, item)
         self.after_flush_table()
 
