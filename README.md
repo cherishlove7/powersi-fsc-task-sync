@@ -14,10 +14,10 @@
 
 Pyqt5+requests+sqlalchemy+ddddocr
 
-Pyqt5：界面开发
-requests：网络请求
-sqlalchemy：数据库连接
-ddddocr：验证码识别
+- Pyqt5：界面开发
+- requests：网络请求
+- sqlalchemy：数据库连接
+- ddddocr：验证码识别
 
 ```shell
 pip install PyQt5==5.15.4
