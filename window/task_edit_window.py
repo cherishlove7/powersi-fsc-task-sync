@@ -25,6 +25,7 @@ class TaskEditWindow(QMainWindow, Ui_TaskEditWindow):
         super(TaskEditWindow, self).__init__()
         self.powersi = PowersiService()
         self.setupUi(self)
+        self.groupBox.setTitle(f'{self.powersi.message}')
         self.setWindowTitle("基金安全检查任务处理工具")
         self.setFont(QFont("Microsoft YaHei", 10))
         self.setGeometry(0, 0, 1366, 768)

@@ -24,6 +24,7 @@ class PowersiService:
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/114.0'
         }
         self.username = None
+        self.message = '查询'
         retries = 1
         while retries <= 5:
             retries += 1
@@ -110,9 +111,10 @@ class PowersiService:
             current_user_info = {
                 'username': username,
                 'name': psn_info['data']['staff_name'],
-                'message': f"欢迎{psn_info['data']['staff_name']}({psn_info['data']['dept_name']})",
+                'message': f"{psn_info['data']['dept_name']}-{psn_info['data']['staff_name']}",
                 'dept_name': psn_info['data']['dept_name']
             }
+            self.message = current_user_info['message']
             self.username = username
             # with open(self.cookie_path, mode='w') as f:
             #     f.write(self.headers['Cookie'])

@@ -7,7 +7,7 @@
 @License:     (C)Copyright 2021-2022, Little duo
 """
 from typing import List, Optional
-from sqlalchemy import Column, String, create_engine, Integer, TEXT, update
+from sqlalchemy import Column, String, create_engine, Integer, TEXT, update, BigInteger
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from pydantic import BaseModel, validator
@@ -21,21 +21,21 @@ Base = declarative_base()
 
 class TaskTable(Base):
     __tablename__ = 'powersi_fsc_task'
-    system_task_id = Column(String(200), primary_key=True)  # 系统任务编号
-    subject_code = Column(String(200))  # 基金安全主题编码
-    system_title = Column(String(200))  # 基金安全主题
-    city_name = Column(String(200))  # 地市名称
-    system_process_status = Column(String(200), default='正常')  # 系统处理状态: 正常,异常,可疑,无法执行,优化脚本
-    task_exec_time = Column(String(200))  # 任务执行时长
-    sql_file_name = Column(String(200))  # sql文件名
-    sql_content = Column(TEXT)  # sql语句
-    task_exec_status = Column(String(200), default='未执行')  # 执行状态:未执行,正在执行,执行失败,执行成功
-    result_data = Column(TEXT)  # 执行结果
-    row_count = Column(Integer, default=99999999)  # 结果条数
-    reason = Column(TEXT)  # 异常数据原因
-    task_month = Column(String(200))  # NULL, -- 月份
-    expect_finish_date = Column(String(200))  # 期望完成时间
-    memo = Column(TEXT)  # 备注
+    system_task_id = Column(String(200), primary_key=True, comment='系统任务编号')
+    subject_code = Column(String(200), comment='基金安全主题编码')
+    system_title = Column(String(200), comment='基金安全主题')
+    city_name = Column(String(200), comment='地市名称')
+    system_process_status = Column(String(200), default='正常', comment='系统处理状态[正常,异常,可疑,无法执行,优化脚本]')
+    task_exec_time = Column(String(200), comment='任务执行时长')
+    sql_file_name = Column(String(200), comment='SQL文件名')
+    sql_content = Column(TEXT, comment='SQL语句')
+    task_exec_status = Column(String(200), default='未执行', comment='执行状态[未执行,正在执行,执行失败,执行成功]')
+    result_data = Column(TEXT, comment='执行结果')
+    row_count = Column(BigInteger, default=99999999, comment='SQL执行结果条数')
+    reason = Column(TEXT, comment='异常数据原因')
+    task_month = Column(String(200), comment='月份')
+    expect_finish_date = Column(String(200), comment='期望完成时间')
+    memo = Column(TEXT, comment='备注')
 
     @classmethod
     def get_sorted_query(cls, session):
