@@ -9,7 +9,6 @@
 import sys
 from PyQt5.QtGui import QPixmap, QMovie
 from PyQt5.QtWidgets import QApplication, QSplashScreen, QLabel, QMainWindow
-
 from window.task_edit_window import TaskEditWindow
 
 
