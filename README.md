@@ -2,9 +2,9 @@
 
 #### 介绍
 
-创智和宇信息管理平台基金安全任务处理器
+创智和宇信息管理平台基金安全任务管理器
 
-1. 因上周开会提到其它省份内外网不互通问题，因此已改造此工具，可以选择连接SQLite数据库，也可以选择直接连接postresql数据库
+1. 因上周开会提到其它省份内外网不互通问题，因此已改造此工具，可以选择连接SQLite数据库作为临时数据库，也可以选择直接连接postresql数据库
 
    工具主要功能是从信息管理平台下拉同步待处理任务，结合基金安全检查执行器，执行完毕后，编辑检查说明，将任务提交至信息管理平台
 
@@ -19,16 +19,6 @@ Pyqt5+requests+sqlalchemy+ddddocr
 - sqlalchemy：数据库连接
 - ddddocr：验证码识别
 
-```shell
-pip install PyQt5==5.15.4
-pip install ddddocr==1.4.7
-pip install requests==2.28.2
-pip install SQLAlchemy==1.3.22
-pip install psycopg2==2.7.7
-pip install pydantic==1.10.6
-pip install pyinstaller==5.8.0
-```
-
 #### 启动步骤
 
 ##### 1.配置文件
@@ -42,7 +32,13 @@ login_timer_minutes = 10
 [Database]
 url = postgresql://user:password@host:port/database
 echo = True
+```
 
+如果内网不通无法连接postgresql，可以连接sqlite，[Database]可进行如下配置：
+```ini
+[Database]
+url = sqlite:///powersi.db?check_same_thread=False
+echo = True
 ```
 
 | 变量类别            | 变量名              | 注释                                                         |
@@ -53,12 +49,6 @@ echo = True
 | Database            | url                 | sqlalchemy数据库连接地址                                     |
 | Database            | echo                | 是否开启数据库日志                                           |
 
-如果内网不通无法连接postgresql，可以连接sqlite，可进行如下配置：
-```ini
-[Database]
-url = sqlite:///powersi.db?check_same_thread=False
-echo = True
-```
 
 ##### 2.打包exe
 
@@ -69,11 +59,7 @@ pip install pyinstaller
 pip install auto-py-to-exe
 ```
 
-2.打包命令：
-
-```
-pyinstaller --noconfirm --onefile --console --icon "C:/Users/Admin/PycharmProjects/powersi-fsc-task-sync/resource/ico/agt utilities.ico" --add-data "C:/Users/Admin/PycharmProjects/powersi-fsc-task-sync/resource/data/onnxruntime/capi/onnxruntime_providers_shared.dll;." --add-data "C:/Users/Admin/PycharmProjects/powersi-fsc-task-sync/resource/data/ddddocr;ddddocr/"  "C:/Users/Admin/PycharmProjects/powersi-fsc-task-sync/main.py"
-```
+2.程序打包：
 使用auto-py-to-exe打包:
 
 ![打包界面.png](resource/images/打包界面.png)
