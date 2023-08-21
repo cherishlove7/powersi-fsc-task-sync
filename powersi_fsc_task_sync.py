@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 """
-@File:        main.py
+@File:        powersi_fsc_task_sync.py
 @Author:      Little duo
 @Time:        2023/7/10 17:40
 @Contact:     1049041957@qq.com
